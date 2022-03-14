@@ -1,0 +1,17 @@
+.postContainer::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.postContainer::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+.postContainer::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+.postContainer::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, 0.5);
+}
