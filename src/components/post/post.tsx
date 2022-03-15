@@ -1,4 +1,4 @@
-import { Avatar, Box, Text } from 'grommet';
+import { Avatar, Box, Tag, Text } from 'grommet';
 import styles from '@/styles/Post.module.scss';
 import IPost from '@/types/post';
 
@@ -30,6 +30,20 @@ export default function Post(props: PostProps) {
         >
           <Text weight={'bolder'}>{props.post.title}</Text>
           <Text>{props.post.content}</Text>
+        </Box>
+        <Box
+          className={styles.postTags}
+          overflow={'scroll'}
+          flex="shrink"
+          gap="xsmall"
+          direction="row"
+        >
+          {props.post.tags &&
+            props.post.tags.map((tag) => {
+              return (
+                <Tag key={Math.random()} size="xsmall" value={`#${tag}`} />
+              );
+            })}
         </Box>
       </Box>
     </Box>

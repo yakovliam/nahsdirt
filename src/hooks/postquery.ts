@@ -12,7 +12,7 @@ export default function usePostQuery(page: number) {
       const data: PostGetData = response.data;
 
       // put all new posts into the array of total rendered posts
-      setPosts([...posts, ...data.posts]);
+      setPosts((p) => [...p, ...data.posts]);
     });
   }, [page]);
 

@@ -34,6 +34,7 @@ const handler = async (
       title: post.title,
       content: post.content,
       date: new Date().toString(),
+      tags: post.tags,
     });
 
     return res.status(200).send({ success: true, message: null });

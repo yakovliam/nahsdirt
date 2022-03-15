@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Header, Text } from 'grommet';
+import { Anchor, Avatar, Box, Button, Header, Text } from 'grommet';
 import { Add } from 'grommet-icons';
 import { useRouter } from 'next/router';
 
@@ -8,10 +8,12 @@ export default function HeaderBar() {
   return (
     <Header background="na-brand">
       <Box direction={'row'} flex justify="between" align="center">
-        <Box pad={'small'} gap={'small'} direction="row" align="center">
-          <Avatar src="https://www.napls.us/cms/lib/OH01914683/Centricity/Template/GlobalAssets/images///Logos%202/NAPLSD_Logo.png" />
-          <Text>nahs dirt</Text>
-        </Box>
+        <Anchor color="white" href="/">
+          <Box pad={'small'} gap={'small'} direction="row" align="center">
+            <Avatar src="https://www.napls.us/cms/lib/OH01914683/Centricity/Template/GlobalAssets/images///Logos%202/NAPLSD_Logo.png" />
+            <Text>nahs dirt</Text>
+          </Box>
+        </Anchor>
         <Box pad={'small'} gap={'small'} direction="row">
           <Button
             label={'spill dirt'}
