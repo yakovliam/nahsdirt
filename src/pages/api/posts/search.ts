@@ -5,14 +5,22 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 connect();
 
-export type PostGetData = {
+export type PostSearchData = {
   posts: Array<Post>;
+};
+
+export type PostSearchProps = {
+  tags: Array<string>;
 };
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<PostGetData>,
+  res: NextApiResponse<PostSearchData>,
 ) => {
+  // get search props
+  const searchProps: PostSearchProps = JSON.parse(
+    req.query.searchProps as string,
+  ) as PostSearchProps;
   // get page number
   const page = Number(req.query.page);
   // default 3 per page
@@ -20,7 +28,7 @@ const handler = async (
 
   try {
     // mongoose get
-    const posts = await PostModel.find()
+    const posts = await PostModel.find({ tags: { $in: searchProps.tags } })
       .limit(perPage)
       .skip(perPage * page)
       .sort('-date');

@@ -1,5 +1,5 @@
 import { Anchor, Avatar, Box, Button, Header, Text } from 'grommet';
-import { Add } from 'grommet-icons';
+import { Add, Search } from 'grommet-icons';
 import { useRouter } from 'next/router';
 
 export default function HeaderBar() {
@@ -15,6 +15,7 @@ export default function HeaderBar() {
           </Box>
         </Anchor>
         <Box pad={'small'} gap={'small'} direction="row">
+          <Button icon={<Search />} onClick={() => router.push('/search')} />
           <Button
             label={'spill dirt'}
             color="na-brand-outline"

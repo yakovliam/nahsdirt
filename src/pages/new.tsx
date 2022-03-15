@@ -42,6 +42,11 @@ const New = () => {
       tags: tags.map((tag) => tag.tag),
     };
 
+    if (!post.avatarUrl || !post.date || !post.title || !post.content) {
+      // todo fancy modal saying you are missing fields
+      return;
+    }
+
     // axios post
     axios.post(`/api/posts/new`, { post: post }).finally(() => {
       // router push to home

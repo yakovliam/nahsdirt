@@ -1,5 +1,5 @@
 import Post from '@/components/post';
-import { Box, InfiniteScroll } from 'grommet';
+import { Box, InfiniteScroll, Spinner } from 'grommet';
 import usePostQuery from '../hooks/postquery';
 import { useState } from 'react';
 import IPost from '../types/post/index';
@@ -15,21 +15,23 @@ export default function Home() {
         pad={'medium'}
         direction="column"
         margin={{ top: 'medium' }}
-        round={'small'}
-        gap={'small'}
         animation={'fadeIn'}
-        overflow={'scroll'}
+        overflow={'auto'}
       >
         {/* list of posts, paginated */}
         <InfiniteScroll
-          step={5}
+          step={1}
           onMore={() => {
             // increase page (which inherently loads more items)
             setPage(page + 1);
           }}
           items={posts}
         >
-          {(item: IPost) => <Post key={Math.random()} post={item} />}
+          {(item: IPost) => (
+            <Box flex="grow" margin={{ top: 'small' }}>
+              <Post key={Math.random()} post={item} />
+            </Box>
+          )}
         </InfiniteScroll>
       </Box>
     </Box>
