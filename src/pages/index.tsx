@@ -1,5 +1,5 @@
 import Post from '@/components/post';
-import { Box, InfiniteScroll, Spinner } from 'grommet';
+import { Box, InfiniteScroll } from 'grommet';
 import usePostQuery from '../hooks/postquery';
 import { useState } from 'react';
 import IPost from '../types/post/index';

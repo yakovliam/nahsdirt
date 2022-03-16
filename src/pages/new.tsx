@@ -82,7 +82,7 @@ const New = () => {
         </Box>
         <Box
           className={styles.postTags}
-          overflow={'scroll'}
+          overflow={'auto'}
           flex="shrink"
           gap="xsmall"
           direction="row"

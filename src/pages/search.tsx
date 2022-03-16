@@ -1,14 +1,32 @@
 import Post from '@/components/post';
 import IPost from '@/types/post';
-import { Box, Heading, TextInput, InfiniteScroll } from 'grommet';
-import { Search } from 'grommet-icons';
-import { useState } from 'react';
+import {
+  Box,
+  Heading,
+  TextInput,
+  InfiniteScroll,
+  Keyboard,
+  Button,
+} from 'grommet';
+import { FormSearch, Search } from 'grommet-icons';
+import { useState, useCallback } from 'react';
 import usePostSearchQuery from '../hooks/postsearchquery';
 
 const SearchPage = () => {
   const [searchTag, setSearchTag] = useState('');
+  const [hookedSearchTag, setHookedSearchTag] = useState('');
   const [page, setPage] = useState(0);
-  const { posts, clearPosts } = usePostSearchQuery(page, [searchTag]);
+  const { posts, clearPosts } = usePostSearchQuery(page, [hookedSearchTag]);
+
+  const search = useCallback(() => {
+    // set hooked search tag to update
+    setHookedSearchTag(searchTag);
+
+    // also reset page #
+    setPage(0);
+    // and clear posts
+    clearPosts();
+  }, [searchTag, clearPosts, setPage]);
 
   return (
     <Box fill flex="shrink" align="center">
@@ -22,19 +40,15 @@ const SearchPage = () => {
       >
         <Heading margin={'none'}>Search</Heading>
         <Box direction="row" align="center">
-          <TextInput
-            value={searchTag}
-            onChange={(event) => {
-              // set search tag
-              setSearchTag(event.target.value);
-              // also reset page #
-              setPage(0);
-              // and clear posts
-              clearPosts();
-            }}
-            placeholder="search by tag"
-            icon={<Search />}
-          />
+          <Keyboard onEnter={() => search()}>
+            <TextInput
+              value={searchTag}
+              onChange={(event) => setSearchTag(event.target.value)}
+              placeholder="search by tag"
+              icon={<FormSearch />}
+            />
+          </Keyboard>
+          <Button icon={<Search />} onClick={() => search()} />
         </Box>
       </Box>
       <Box
@@ -44,7 +58,7 @@ const SearchPage = () => {
         round={'small'}
         gap={'small'}
         animation={'fadeIn'}
-        overflow={'scroll'}
+        overflow={'auto'}
       >
         {/* list of posts, paginated */}
         <InfiniteScroll

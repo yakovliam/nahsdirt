@@ -23,6 +23,7 @@
     "axios": "0.26.1",
     "grommet": "2.21.0",
     "grommet-icons": "4.7.0",
+    "lru-cache": "7.5.1",
     "mongoose": "6.2.6",
     "next": "12.1.0",
     "node-sass": "7.0.1",

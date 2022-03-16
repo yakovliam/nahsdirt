@@ -7,6 +7,9 @@ import { PostSearchProps } from '@/pages/api/posts/search';
 export default function usePostSearchQuery(page: number, tags: Array<string>) {
   const [posts, setPosts] = useState<Array<Post>>([]);
 
+  // stringified tags
+  const stringifiedTags = JSON.stringify(tags);
+
   function clearPosts() {
     setPosts([]);
   }
@@ -25,7 +28,7 @@ export default function usePostSearchQuery(page: number, tags: Array<string>) {
         // put all new posts into the array of total rendered posts
         setPosts((p) => [...p, ...data.posts]);
       });
-  }, [page, JSON.stringify(tags)]);
+  }, [page, stringifiedTags]);
 
   return { posts, clearPosts };
 }

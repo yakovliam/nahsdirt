@@ -25,7 +25,7 @@ export default function Post(props: PostProps) {
         </Text>
         <Box
           pad={'medium'}
-          overflow={{ vertical: 'scroll' }}
+          overflow={{ vertical: 'auto' }}
           className={styles.postContainer}
         >
           <Text weight={'bolder'}>{props.post.title}</Text>
@@ -33,7 +33,7 @@ export default function Post(props: PostProps) {
         </Box>
         <Box
           className={styles.postTags}
-          overflow={'scroll'}
+          overflow={'auto'}
           flex="shrink"
           gap="xsmall"
           direction="row"
