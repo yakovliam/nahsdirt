@@ -1,12 +1,11 @@
-import Post from '@/components/post';
-import { Box, InfiniteScroll } from 'grommet';
-import usePostQuery from '../hooks/postquery';
+import { Box } from 'grommet';
+import usePostIndexQuery from '../hooks/postindexquery';
 import { useState } from 'react';
-import IPost from '../types/post/index';
+import PostScrollContainer from '@/components/post/container';
 
-export default function Home() {
+export default function HomePage() {
   const [page, setPage] = useState(0);
-  const { posts } = usePostQuery(page);
+  const { posts } = usePostIndexQuery(page);
 
   return (
     <Box fill flex align="center">
@@ -18,21 +17,13 @@ export default function Home() {
         animation={'fadeIn'}
         overflow={'auto'}
       >
-        {/* list of posts, paginated */}
-        <InfiniteScroll
-          step={1}
+        <PostScrollContainer
           onMore={() => {
             // increase page (which inherently loads more items)
             setPage(page + 1);
           }}
           items={posts}
-        >
-          {(item: IPost) => (
-            <Box flex="grow" margin={{ top: 'small' }}>
-              <Post key={Math.random()} post={item} />
-            </Box>
-          )}
-        </InfiniteScroll>
+        />
       </Box>
     </Box>
   );

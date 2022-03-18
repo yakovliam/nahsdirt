@@ -1,12 +1,13 @@
 import { connect } from '@/database/database';
 import PostModel from '@/models/PostModel';
-import Post from '@/types/post';
+import { IPost } from '@/types/post';
+import sanitize from 'mongo-sanitize';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 connect();
 
 export type PostGetData = {
-  posts: Array<Post>;
+  posts: Array<IPost>;
 };
 
 const handler = async (
@@ -14,9 +15,9 @@ const handler = async (
   res: NextApiResponse<PostGetData>,
 ) => {
   // get page number
-  const page = Number(req.query.page);
-  // default 3 per page
-  const perPage = 3;
+  const page = Number(sanitize(req.query.page));
+  // default 10 per page
+  const perPage = 10;
 
   try {
     // mongoose get
@@ -30,7 +31,7 @@ const handler = async (
     console.error(e);
   }
 
-  res.status(400).send({ posts: [] });
+  res.status(400).send({} as any);
 };
 
 export default handler;

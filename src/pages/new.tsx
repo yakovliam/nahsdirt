@@ -1,4 +1,4 @@
-import IPost from '@/types/post';
+import { IPost } from '@/types/post';
 import axios from 'axios';
 import {
   Box,
@@ -20,7 +20,7 @@ type NewTag = {
   id: string;
 };
 
-const New = () => {
+const NewPage = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tags, setTags] = useState<Array<NewTag>>([]);
@@ -36,10 +36,12 @@ const New = () => {
   const sendDirt = () => {
     const post: IPost = {
       avatarUrl: data.imageUrl ? data.imageUrl : '',
-      date: new Date().toString(),
+      date: String(new Date().getTime()),
       title: title,
       content: content,
       tags: tags.map((tag) => tag.tag),
+      numberOfComments: 0,
+      uuid: '',
     };
 
     if (!post.avatarUrl || !post.date || !post.title || !post.content) {
@@ -48,10 +50,19 @@ const New = () => {
     }
 
     // axios post
-    axios.post(`/api/posts/new`, { post: post }).finally(() => {
-      // router push to home
-      router.push('/');
-    });
+    axios
+      .post(`/api/post/new`, { post: post })
+      .then(() => {
+        // router push to home
+        router.push('/');
+      })
+      .catch((e) => {
+        // todo fancy modal with error
+        console.error(e);
+
+        // todo remove this v v v
+        router.push('/');
+      });
   };
 
   return (
@@ -106,4 +117,4 @@ const New = () => {
   );
 };
 
-export default New;
+export default NewPage;

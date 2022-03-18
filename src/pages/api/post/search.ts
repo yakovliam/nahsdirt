@@ -1,12 +1,13 @@
 import { connect } from '@/database/database';
 import PostModel from '@/models/PostModel';
-import Post from '@/types/post';
+import { IPost } from '@/types/post';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import sanitize from 'mongo-sanitize';
 
 connect();
 
 export type PostSearchData = {
-  posts: Array<Post>;
+  posts: Array<IPost>;
 };
 
 export type PostSearchProps = {
@@ -19,12 +20,12 @@ const handler = async (
 ) => {
   // get search props
   const searchProps: PostSearchProps = JSON.parse(
-    req.query.searchProps as string,
+    sanitize(req.query.searchProps) as string,
   ) as PostSearchProps;
   // get page number
-  const page = Number(req.query.page);
-  // default 3 per page
-  const perPage = 3;
+  const page = Number(sanitize(req.query.page));
+  // default 10 per page
+  const perPage = 10;
 
   try {
     // mongoose get

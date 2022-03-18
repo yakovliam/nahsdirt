@@ -20,10 +20,13 @@
     ]
   },
   "dependencies": {
+    "@types/mongo-sanitize": "1.0.1",
+    "@types/uuid": "8.3.4",
     "axios": "0.26.1",
     "grommet": "2.21.0",
     "grommet-icons": "4.7.0",
     "lru-cache": "7.5.1",
+    "mongo-sanitize": "1.1.0",
     "mongoose": "6.2.6",
     "next": "12.1.0",
     "node-sass": "7.0.1",
@@ -33,7 +36,8 @@
     "recoil": "0.6.1",
     "recoil-persist": "4.0.0",
     "styled-components": "5.3.3",
-    "swr": "1.2.2"
+    "swr": "1.2.2",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
     "@commitlint/cli": "16.2.1",

@@ -1,0 +1,17 @@
+.commentContainer::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.commentContainer::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+.commentContainer::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+.commentContainer::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, 0.5);
+}

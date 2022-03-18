@@ -1,9 +1,52 @@
+import { avatarState } from '@/recoil/atoms';
 import { Anchor, Avatar, Box, Button, Header, Text } from 'grommet';
-import { Add, Search } from 'grommet-icons';
+import { Add, Refresh, Search } from 'grommet-icons';
 import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
+import { AvatarGenerateData } from '../../pages/api/avatar/generate';
+import useResponsive from '../../hooks/responsive';
 
 export default function HeaderBar() {
   const router = useRouter();
+  const [, setAvatarData] = useRecoilState(avatarState);
+  const { isMobile } = useResponsive();
+
+  const resetAvatar = () => {
+    setAvatarData({ imageUrl: null } as AvatarGenerateData);
+  };
+
+  const ResponsiveButtons = () => {
+    if (isMobile) {
+      return (
+        <Box pad={'small'} gap={'small'} direction="row">
+          <Button icon={<Refresh />} onClick={() => resetAvatar()} />
+          <Button icon={<Search />} onClick={() => router.push('/search')} />
+          <Button
+            color="na-brand-outline"
+            onClick={() => router.push('/new')}
+            icon={<Add />}
+          />
+        </Box>
+      );
+    } else {
+      return (
+        <Box pad={'small'} gap={'small'} direction="row">
+          <Button
+            icon={<Refresh />}
+            label="refresh profile pic"
+            onClick={() => resetAvatar()}
+          />
+          <Button icon={<Search />} onClick={() => router.push('/search')} />
+          <Button
+            label={'spill dirt'}
+            color="na-brand-outline"
+            onClick={() => router.push('/new')}
+            icon={<Add />}
+          />
+        </Box>
+      );
+    }
+  };
 
   return (
     <Header background="na-brand">
@@ -14,15 +57,7 @@ export default function HeaderBar() {
             <Text>nahs dirt</Text>
           </Box>
         </Anchor>
-        <Box pad={'small'} gap={'small'} direction="row">
-          <Button icon={<Search />} onClick={() => router.push('/search')} />
-          <Button
-            label={'spill dirt'}
-            color="na-brand-outline"
-            onClick={() => router.push('/new')}
-            icon={<Add />}
-          />
-        </Box>
+        <ResponsiveButtons />
       </Box>
     </Header>
   );

@@ -9,7 +9,7 @@ export const useAvatarData = () => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    if (avatarData.imageUrl === null) {
+    if (avatarData.imageUrl === null || avatarData.imageUrl === undefined) {
       axios
         .get(`/api/avatar/generate`)
         .then((response) => {

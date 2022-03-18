@@ -1,13 +1,5 @@
-import Post from '@/components/post';
-import IPost from '@/types/post';
-import {
-  Box,
-  Heading,
-  TextInput,
-  InfiniteScroll,
-  Keyboard,
-  Button,
-} from 'grommet';
+import PostScrollContainer from '@/components/post/container';
+import { Box, Heading, TextInput, Keyboard, Button } from 'grommet';
 import { FormSearch, Search } from 'grommet-icons';
 import { useState, useCallback } from 'react';
 import usePostSearchQuery from '../hooks/postsearchquery';
@@ -60,21 +52,13 @@ const SearchPage = () => {
         animation={'fadeIn'}
         overflow={'auto'}
       >
-        {/* list of posts, paginated */}
-        <InfiniteScroll
-          step={3}
+        <PostScrollContainer
           onMore={() => {
             // increase page (which inherently loads more items)
             setPage(page + 1);
           }}
           items={posts}
-        >
-          {(item: IPost) => (
-            <Box flex="grow" margin={{ top: 'small' }}>
-              <Post key={Math.random()} post={item} />
-            </Box>
-          )}
-        </InfiniteScroll>
+        />
       </Box>
     </Box>
   );

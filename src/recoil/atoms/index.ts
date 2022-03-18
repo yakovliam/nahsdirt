@@ -4,8 +4,9 @@ import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
+const defaultAvatarState: AvatarGenerateData = { imageUrl: null };
 export const avatarState = atom({
   key: 'avatar',
-  default: { imageUrl: null } as AvatarGenerateData,
+  default: defaultAvatarState,
   effects_UNSTABLE: [persistAtom],
 });

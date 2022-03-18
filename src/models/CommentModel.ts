@@ -1,11 +1,7 @@
 import mongoose from 'mongoose';
 
-const postModelSchema = new mongoose.Schema({
+const commentModelSchema = new mongoose.Schema({
   avatarUrl: {
-    type: String,
-    required: true,
-  },
-  title: {
     type: String,
     required: true,
   },
@@ -21,20 +17,15 @@ const postModelSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  tags: {
-    type: [String],
-    required: true,
-    default: [],
-  },
   uuid: {
     type: String,
     required: true,
   },
-  numberOfComments: {
-    type: Number,
+  parent: {
+    type: String,
     required: true,
-    default: 0,
   },
 });
 
-export default mongoose.models.Post || mongoose.model(`Post`, postModelSchema);
+export default mongoose.models.Comment ||
+  mongoose.model(`Comment`, commentModelSchema);
