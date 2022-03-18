@@ -89,31 +89,43 @@ const PostPage = () => {
       align="center"
       margin={{ top: 'large' }}
       gap={'medium'}
-      overflow={'auto'}
+      overflow={{ vertical: 'auto' }}
     >
-      <Box>
+      <Box flex={false} width={'large'} justify="center" direction="row">
         <Post post={post} isInDetailedView={true} />
       </Box>
-      <Box align={'start'} width={'large'} direction={'row'}>
-        <Keyboard onEnter={sendComment}>
-          <TextInput
-            placeholder="write a comment..."
-            onChange={(event) => setCommentContent(event.target.value)}
-            value={commentContent}
-          />
-        </Keyboard>
-        <Button icon={<Send />} onClick={sendComment} />
+      <Box flex={false}>
+        <Box
+          flex="grow"
+          align={'start'}
+          width={'large'}
+          direction={'row'}
+          pad={{ horizontal: 'medium' }}
+        >
+          <Keyboard onEnter={sendComment}>
+            <TextInput
+              placeholder="write a comment..."
+              onChange={(event) => setCommentContent(event.target.value)}
+              value={commentContent}
+            />
+          </Keyboard>
+          <Button icon={<Send />} onClick={sendComment} />
+        </Box>
       </Box>
-      <Box width={'large'} flex align="start" direction="column">
-        <Heading level={3}>Comments</Heading>
-        <Box align={'center'} direction="column" animation={'fadeIn'}>
-          <CommentScrollContainer
-            onMore={() => {
-              // increase page (which inherently loads more items)
-              setPage(page + 1);
-            }}
-            items={comments}
-          />
+      <Box flex={false}>
+        <Box width={'large'} align="center" flex pad={{ horizontal: 'medium' }}>
+          <Heading level={3} margin={{ top: 'none' }}>
+            Comments
+          </Heading>
+          <Box width={'inherit'} align={'center'} animation={'fadeIn'}>
+            <CommentScrollContainer
+              onMore={() => {
+                // increase page (which inherently loads more items)
+                setPage(page + 1);
+              }}
+              items={comments}
+            />
+          </Box>
         </Box>
       </Box>
     </Box>

@@ -11,13 +11,19 @@ type CommentScrollContainerProps = {
 const CommentScrollContainer = (props: CommentScrollContainerProps) => {
   return (
     // display 10 at once
-    <InfiniteScroll step={10} onMore={() => props.onMore()} items={props.items}>
-      {(item: IComment) => (
-        <Box key={Math.random()} flex="grow" margin={{ top: 'small' }}>
-          <Comment comment={item} />
-        </Box>
-      )}
-    </InfiniteScroll>
+    <Box>
+      <InfiniteScroll
+        step={10}
+        onMore={() => props.onMore()}
+        items={props.items}
+      >
+        {(item: IComment) => (
+          <Box key={Math.random()} flex="grow" margin={{ bottom: 'medium' }}>
+            <Comment comment={item} />
+          </Box>
+        )}
+      </InfiniteScroll>
+    </Box>
   );
 };
 
