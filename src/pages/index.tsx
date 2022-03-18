@@ -5,7 +5,7 @@ import PostScrollContainer from '@/components/post/container';
 import useResponsive from '../hooks/responsive';
 import RssFeed from '@/components/rss';
 
-const EVENTS_DISPLAY_MINIMUM_WIDTH = 1330;
+const EVENTS_DISPLAY_MINIMUM_WIDTH = 860;
 
 export default function HomePage() {
   const [page, setPage] = useState(0);
@@ -14,21 +14,25 @@ export default function HomePage() {
   const { rawWidth, isMobile } = useResponsive();
 
   return (
-    <Box fill overflow={{ vertical: 'auto', horizontal: 'hidden' }}>
+    <Box fill overflow={{ vertical: 'scroll', horizontal: 'hidden' }}>
       <Box direction="row" justify="around">
         {!isMobile && (
-          <Box flex animation={'fadeIn'}>
+          <Box
+            height={'max-content'}
+            flex
+            animation={'fadeIn'}
+            pad={{ bottom: 'small' }}
+          >
             {rawWidth > EVENTS_DISPLAY_MINIMUM_WIDTH && postsHaveQueried && (
               <RssFeed />
             )}
           </Box>
         )}
         <Box
-          pad={'medium'}
           direction="column"
-          margin={{ top: 'medium' }}
           animation={'fadeIn'}
-          align="center"
+          margin={{ top: 'large' }}
+          height="fit-content"
         >
           <PostScrollContainer
             onMore={() => {

@@ -11,7 +11,7 @@ const handler = async (
 ) => {
   // get random image
   try {
-    const response = await axios.get('https://source.unsplash.com/random');
+    const response = await axios.get('https://picsum.photos/200');
     const url: string | undefined = response.request.res.responseUrl;
 
     return res.status(200).send({ imageUrl: url });

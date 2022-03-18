@@ -24,52 +24,56 @@ export default function Post(props: PostProps) {
 
   return (
     <Box
-      direction="row"
       height={{ min: 'small', max: 'medium' }}
-      width={'large'}
+      width={{ max: 'medium' }}
       gap={'small'}
       pad={'medium'}
       elevation={'small'}
+      flex={true}
     >
-      <Box>
-        <Avatar src={props.post.avatarUrl} size="medium" round={false} />
-      </Box>
-      <Box direction="column" fill gap={'small'}>
-        <Text color={'dark-3'}>
-          {new Date(Number(props.post.date)).toLocaleString()}
-        </Text>
-        <Box
-          pad={{ horizontal: 'small' }}
-          overflow={{ vertical: 'auto', horizontal: 'hidden' }}
-          className={styles.postContainer}
-          style={{ wordWrap: 'break-word' }}
-        >
-          <Text weight={'bolder'}>{props.post.title}</Text>
-          <Text>{props.post.content}</Text>
+      <Box direction="row" justify="start" gap={'small'} flex="grow">
+        <Box flex={false}>
+          <Avatar src={props.post.avatarUrl} round={true} />
         </Box>
-        <Box
-          align="end"
-          className={styles.postTags}
-          overflow={'auto'}
-          flex="grow"
-          gap="xsmall"
-          direction="row"
-        >
-          {props.post.tags &&
-            props.post.tags.map((tag) => {
-              return (
-                <Tag key={Math.random()} size="xsmall" value={`#${tag}`} />
-              );
-            })}
+        <Box flex direction="column" gap={'small'}>
+          <Box direction="row" align="center" justify="between" flex="grow">
+            <Text color={'dark-3'}>
+              {new Date(Number(props.post.date)).toLocaleString()}
+            </Text>
+            <Box>
+              <Button
+                icon={<Chat />}
+                label={String(props.post.numberOfComments)}
+                plain
+                onClick={onCommentClick}
+              />
+            </Box>
+          </Box>
+          <Box
+            flex="grow"
+            className={styles.postContainer}
+            style={{ wordWrap: 'break-word' }}
+            overflow={{ vertical: 'auto', horizontal: 'hidden' }}
+          >
+            <Text weight={'bolder'}>{props.post.title}</Text>
+            <Text>{props.post.content}</Text>
+          </Box>
         </Box>
       </Box>
-      <Box>
-        <Button
-          icon={<Chat />}
-          label={String(props.post.numberOfComments)}
-          plain
-          onClick={onCommentClick}
-        />
+      <Box
+        className={styles.postTags}
+        overflow={{ horizontal: 'auto' }}
+        gap="xsmall"
+        direction="row"
+      >
+        {props.post.tags &&
+          props.post.tags.map((tag) => {
+            return (
+              <Box flex={false} key={Math.random()}>
+                <Tag size="xsmall" value={`#${tag}`} />
+              </Box>
+            );
+          })}
       </Box>
     </Box>
   );

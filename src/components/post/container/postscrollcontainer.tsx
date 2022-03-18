@@ -11,13 +11,20 @@ type PostScrollContainerProps = {
 const PostScrollContainer = (props: PostScrollContainerProps) => {
   return (
     // display 10 at once
-    <InfiniteScroll step={10} onMore={() => props.onMore()} items={props.items}>
-      {(item: IPost) => (
-        <Box key={Math.random()} flex="grow" margin={{ top: 'small' }}>
-          <Post post={item} isInDetailedView={false} />
-        </Box>
-      )}
-    </InfiniteScroll>
+    <Box>
+      <InfiniteScroll
+        step={10}
+        onMore={() => props.onMore()}
+        items={props.items}
+        replace={true}
+      >
+        {(item: IPost) => (
+          <Box key={Math.random()} flex="grow" margin={{ bottom: 'medium' }}>
+            <Post post={item} isInDetailedView={false} />
+          </Box>
+        )}
+      </InfiniteScroll>
+    </Box>
   );
 };
 

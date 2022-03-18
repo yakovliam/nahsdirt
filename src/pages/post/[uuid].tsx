@@ -87,8 +87,7 @@ const PostPage = () => {
       fill
       flex
       align="center"
-      margin={{ top: 'medium' }}
-      pad={'medium'}
+      margin={{ top: 'large' }}
       gap={'medium'}
       overflow={'auto'}
     >
