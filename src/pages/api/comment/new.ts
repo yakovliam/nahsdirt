@@ -13,6 +13,8 @@ export type CommentNewData = {
   message: string | null;
 };
 
+export const COMMENT_CHAR_LIMIT = 250;
+
 const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<CommentNewData>,
@@ -39,6 +41,13 @@ const handler = async (
     return res
       .status(400)
       .send({ success: false, message: 'post is missing required fields' });
+  }
+
+  if (comment.content.length > COMMENT_CHAR_LIMIT) {
+    return res.status(400).send({
+      success: false,
+      message: `comment character limit is  ${COMMENT_CHAR_LIMIT}`,
+    });
   }
 
   try {

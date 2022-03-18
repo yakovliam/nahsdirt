@@ -4,6 +4,7 @@ import { PostGetData } from '../pages/api/post/getindexpage';
 import { IPost } from '@/types/post';
 
 export default function usePostIndexQuery(page: number) {
+  const [hasQueried, setHasQueried] = useState(false);
   const [posts, setPosts] = useState<Array<IPost>>([]);
 
   // whenever page changes, fetch from api
@@ -15,8 +16,11 @@ export default function usePostIndexQuery(page: number) {
 
         // put all new posts into the array of total rendered posts
         setPosts((p) => [...p, ...data.posts]);
+
+        // set has queried
+        setHasQueried(true);
       });
   }, [page]);
 
-  return { posts };
+  return { posts, hasQueried };
 }

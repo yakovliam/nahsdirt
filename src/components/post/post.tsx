@@ -34,22 +34,24 @@ export default function Post(props: PostProps) {
       <Box>
         <Avatar src={props.post.avatarUrl} size="medium" round={false} />
       </Box>
-      <Box direction="column" fill>
+      <Box direction="column" fill gap={'small'}>
         <Text color={'dark-3'}>
           {new Date(Number(props.post.date)).toLocaleString()}
         </Text>
         <Box
-          pad={'medium'}
-          overflow={{ vertical: 'auto' }}
+          pad={{ horizontal: 'small' }}
+          overflow={{ vertical: 'auto', horizontal: 'hidden' }}
           className={styles.postContainer}
+          style={{ wordWrap: 'break-word' }}
         >
           <Text weight={'bolder'}>{props.post.title}</Text>
           <Text>{props.post.content}</Text>
         </Box>
         <Box
+          align="end"
           className={styles.postTags}
           overflow={'auto'}
-          flex="shrink"
+          flex="grow"
           gap="xsmall"
           direction="row"
         >

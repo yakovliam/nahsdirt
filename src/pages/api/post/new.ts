@@ -12,6 +12,8 @@ export type PostNewData = {
   message: string | null;
 };
 
+export const POST_CHAR_LIMIT = 250;
+
 const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<PostNewData>,
@@ -28,6 +30,13 @@ const handler = async (
 
   // get post from body
   const post: IPost = sanitize(body.post) as IPost;
+
+  if (post.content.length > POST_CHAR_LIMIT) {
+    return res.status(400).send({
+      success: false,
+      message: `post character limit is  ${POST_CHAR_LIMIT}`,
+    });
+  }
 
   const postContainsEmptyTags = post.tags.some((t: string) => !t || t === '');
 

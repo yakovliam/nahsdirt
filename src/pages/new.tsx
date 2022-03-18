@@ -14,6 +14,7 @@ import { useAvatarData } from '../hooks/avatar';
 import { useRouter } from 'next/router';
 import styles from '@/styles/New.module.scss';
 import { Add } from 'grommet-icons';
+import { POST_CHAR_LIMIT } from './api/post/new';
 
 type NewTag = {
   tag: string;
@@ -46,6 +47,11 @@ const NewPage = () => {
 
     if (!post.avatarUrl || !post.date || !post.title || !post.content) {
       // todo fancy modal saying you are missing fields
+      return;
+    }
+
+    if (post.content.length > POST_CHAR_LIMIT) {
+      // todo fancy modal saying too many characters
       return;
     }
 
