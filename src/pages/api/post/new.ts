@@ -45,7 +45,6 @@ const handler = async (
     !post.content ||
     !post.date ||
     !post.tags ||
-    !post.title ||
     postContainsEmptyTags
   ) {
     return res.status(400).send({
@@ -60,7 +59,6 @@ const handler = async (
     // create new
     await PostModel.create({
       avatarUrl: post.avatarUrl,
-      title: post.title,
       content: post.content,
       date: date.getTime(),
       dateReadable: date.toLocaleString(),

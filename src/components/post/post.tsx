@@ -55,7 +55,6 @@ export default function Post(props: PostProps) {
             style={{ wordWrap: 'break-word' }}
             overflow={{ vertical: 'auto', horizontal: 'hidden' }}
           >
-            <Text weight={'bolder'}>{props.post.title}</Text>
             <Text>{props.post.content}</Text>
           </Box>
         </Box>

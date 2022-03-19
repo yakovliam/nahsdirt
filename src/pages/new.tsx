@@ -8,6 +8,7 @@ import {
   Button,
   Tag,
   Keyboard,
+  Text,
 } from 'grommet';
 import { useState } from 'react';
 import { useAvatarData } from '../hooks/avatar';
@@ -22,7 +23,6 @@ type NewTag = {
 };
 
 const NewPage = () => {
-  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tags, setTags] = useState<Array<NewTag>>([]);
   const [currentTag, setCurrentTag] = useState('');
@@ -38,14 +38,13 @@ const NewPage = () => {
     const post: IPost = {
       avatarUrl: data.imageUrl ? data.imageUrl : '',
       date: String(new Date().getTime()),
-      title: title,
       content: content,
       tags: tags.map((tag) => tag.tag),
       numberOfComments: 0,
       uuid: '',
     };
 
-    if (!post.avatarUrl || !post.date || !post.title || !post.content) {
+    if (!post.avatarUrl || !post.date || !post.content) {
       // todo fancy modal saying you are missing fields
       return;
     }
@@ -75,17 +74,22 @@ const NewPage = () => {
     <Box fill flex align="center">
       <Heading>Create new dirt</Heading>
       <Box pad={'xsmall'} width={'medium'} gap="small">
-        <TextInput
-          placeholder="dirt title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
         <TextArea
           placeholder="the dirt"
           resize={'vertical'}
           value={content}
           onChange={(event) => setContent(event.target.value)}
         />
+        <Box justify="end" align="center" direction="row">
+          <Text
+            color={
+              content.length <= POST_CHAR_LIMIT ? 'status-ok' : 'status-error'
+            }
+          >
+            {content.length}
+          </Text>
+          <Text color={'dark-5'}>/{POST_CHAR_LIMIT}</Text>
+        </Box>
         <Box direction="row">
           <Keyboard onEnter={() => addTag()}>
             <TextInput
@@ -94,7 +98,6 @@ const NewPage = () => {
               onChange={(event) => setCurrentTag(event.target.value)}
             />
           </Keyboard>
-
           <Button icon={<Add />} onClick={() => addTag()} />
         </Box>
         <Box

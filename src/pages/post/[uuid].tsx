@@ -3,7 +3,15 @@ import { useAvatarData } from '@/hooks/avatar';
 import useCommentsQuery from '@/hooks/commentsquery';
 import { IComment } from '@/types/comment';
 import axios from 'axios';
-import { Box, Button, Heading, Keyboard, Spinner, TextInput } from 'grommet';
+import {
+  Box,
+  Text,
+  Button,
+  Heading,
+  Keyboard,
+  Spinner,
+  TextInput,
+} from 'grommet';
 import { Send } from 'grommet-icons';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -94,14 +102,8 @@ const PostPage = () => {
       <Box flex={false} width={'large'} justify="center" direction="row">
         <Post post={post} isInDetailedView={true} />
       </Box>
-      <Box flex={false}>
-        <Box
-          flex="grow"
-          align={'start'}
-          width={'large'}
-          direction={'row'}
-          pad={{ horizontal: 'medium' }}
-        >
+      <Box flex={false} pad={{ horizontal: 'medium' }}>
+        <Box flex="grow" align={'start'} width={'large'} direction={'row'}>
           <Keyboard onEnter={sendComment}>
             <TextInput
               placeholder="write a comment..."
@@ -110,6 +112,18 @@ const PostPage = () => {
             />
           </Keyboard>
           <Button icon={<Send />} onClick={sendComment} />
+        </Box>
+        <Box justify="end" align="center" direction="row">
+          <Text
+            color={
+              commentContent.length <= COMMENT_CHAR_LIMIT
+                ? 'status-ok'
+                : 'status-error'
+            }
+          >
+            {commentContent.length}
+          </Text>
+          <Text color={'dark-5'}>/{COMMENT_CHAR_LIMIT}</Text>
         </Box>
       </Box>
       <Box flex={false}>
