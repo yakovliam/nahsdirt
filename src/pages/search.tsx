@@ -1,4 +1,4 @@
-import PostScrollContainer from '@/components/post/container';
+import PostScrollContainer from '@/components/post/scrollcontainer';
 import { Box, Heading, TextInput, Keyboard, Button } from 'grommet';
 import { FormSearch, Search } from 'grommet-icons';
 import { useState, useCallback } from 'react';

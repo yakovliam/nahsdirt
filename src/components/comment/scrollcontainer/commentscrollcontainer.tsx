@@ -11,7 +11,7 @@ type CommentScrollContainerProps = {
 const CommentScrollContainer = (props: CommentScrollContainerProps) => {
   return (
     // display 10 at once
-    <Box>
+    <Box width={'inherit'}>
       <InfiniteScroll
         step={10}
         onMore={() => props.onMore()}

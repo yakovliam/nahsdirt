@@ -25,7 +25,7 @@ export default function Post(props: PostProps) {
   return (
     <Box
       height={{ min: 'small', max: 'medium' }}
-      width={{ max: 'medium' }}
+      width={{ max: 'large' }}
       gap={'small'}
       pad={'medium'}
       elevation={'small'}
@@ -36,7 +36,7 @@ export default function Post(props: PostProps) {
           <Avatar src={props.post.avatarUrl} round={true} />
         </Box>
         <Box flex direction="column" gap={'small'}>
-          <Box direction="row" align="start" justify="between" flex="grow">
+          <Box flex={'shrink'} direction="row" align="start" justify="between">
             <Text color={'dark-3'}>
               {new Date(Number(props.post.date)).toLocaleString()}
             </Text>

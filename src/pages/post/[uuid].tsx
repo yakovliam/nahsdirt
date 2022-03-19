@@ -1,4 +1,4 @@
-import CommentScrollContainer from '@/components/comment/container';
+import CommentScrollContainer from '@/components/comment/scrollcontainer';
 import { useAvatarData } from '@/hooks/avatar';
 import useCommentsQuery from '@/hooks/commentsquery';
 import { IComment } from '@/types/comment';
@@ -99,7 +99,13 @@ const PostPage = () => {
       gap={'medium'}
       overflow={{ vertical: 'auto' }}
     >
-      <Box flex={false} width={'large'} justify="center" direction="row">
+      <Box
+        flex={false}
+        width={'large'}
+        justify="center"
+        direction="row"
+        pad={'medium'}
+      >
         <Post post={post} isInDetailedView={true} />
       </Box>
       <Box flex={false} pad={{ horizontal: 'medium' }}>

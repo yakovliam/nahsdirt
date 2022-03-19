@@ -1,11 +1,11 @@
 import { Box } from 'grommet';
 import usePostIndexQuery from '../hooks/postindexquery';
 import { useState } from 'react';
-import PostScrollContainer from '@/components/post/container';
+import PostScrollContainer from '@/components/post/scrollcontainer';
 import useResponsive from '../hooks/responsive';
 import RssFeed from '@/components/rss';
 
-const EVENTS_DISPLAY_MINIMUM_WIDTH = 860;
+const EVENTS_DISPLAY_MINIMUM_WIDTH = 1170;
 
 export default function HomePage() {
   const [page, setPage] = useState(0);

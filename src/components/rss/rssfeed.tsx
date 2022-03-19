@@ -37,11 +37,11 @@ const RssFeed = () => {
               elevation={'small'}
               onClick={() => window.open(item.link)}
             >
-              <Box align={'center'} gap="medium" pad="medium">
+              <Box align={'center'} gap="small" pad="medium">
                 <Text textAlign="center" size="small" weight="bold">
                   {item.title}
                 </Text>
-                <Text>{item.contentSnippet}</Text>
+                <Text size="small">{item.contentSnippet}</Text>
               </Box>
               <Box
                 direction="row"
